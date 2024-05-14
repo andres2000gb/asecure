@@ -7,7 +7,8 @@ kind: Deployment
 ### Deployment Metadata
 ###
 metadata:
-  name: dvwa-web
+  name: dvwa-group25-web
+  namespace: dvwa-group25-web
 
 
 ###
@@ -31,57 +32,20 @@ spec:
 
     # Container/Volume definition
     spec:
+      serviceAccountName: sa-web
       containers:
         - name: dvwa
-          image: cytopia/dvwa:php-8.1
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 33
+            runAsGroup: 33
+            capabilities:
+              drop:
+                - ALL
+          image: europe-docker.pkg.dev/asgroup25/registry-as-25/dvwa:latest
           ports:
             - containerPort: 80
           env:
-            - name: RECAPTCHA_PRIV_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: RECAPTCHA_PRIV_KEY
-            - name: RECAPTCHA_PUB_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: RECAPTCHA_PUB_KEY
-            - name: SECURITY_LEVEL
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: SECURITY_LEVEL
-            - name: PHPIDS_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: PHPIDS_ENABLED
-            - name: PHPIDS_VERBOSE
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: PHPIDS_VERBOSE
-            - name: PHP_DISPLAY_ERRORS
-              valueFrom:
-                configMapKeyRef:
-                  name: dvwa-config
-                  key: PHP_DISPLAY_ERRORS
-
-            - name: MYSQL_HOSTNAME
+            - name: DB_SERVER
               value: dvwa-mysql-service
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: dvwa-secrets
-                  key: DVWA_DATABASE
-            - name: MYSQL_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: dvwa-secrets
-                  key: DVWA_USERNAME
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: dvwa-secrets
-                  key: DVWA_PASSWORD

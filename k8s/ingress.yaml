@@ -6,5 +6,6 @@ spec:
   defaultBackend:
     service:
       name: dvwa-web-service
+      namespace: dvwa-group25-web
       port:
         number: 8080

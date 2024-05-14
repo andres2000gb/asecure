@@ -7,7 +7,8 @@ kind: Deployment
 ### Deployment Metadata
 ###
 metadata:
-  name: dvwa-mysql
+  name: dvwa-group25-mysql
+  namespace: dvwa-group25-mysql
 
 
 ###
@@ -31,9 +32,13 @@ spec:
 
     # Container/Volume definition
     spec:
+      serviceAccountName: sa-mysql
       containers:
         - name: mysql
-          image: mariadb:10.1
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+          image: europe-docker.pkg.dev/asgroup25/registry-as-25/mariadb-10:latest
           ports:
             - containerPort: 3306
           volumeMounts:
