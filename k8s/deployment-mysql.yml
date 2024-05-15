@@ -35,9 +35,6 @@ spec:
       serviceAccountName: sa-mysql
       containers:
         - name: mysql
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
           image: europe-docker.pkg.dev/asgroup25/registry-as-25/mariadb-10:latest
           ports:
             - containerPort: 3306
