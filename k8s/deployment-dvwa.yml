@@ -40,4 +40,4 @@ spec:
             - containerPort: 80
           env:
             - name: DB_SERVER
-              value: dvwa-mysql-service
+              value: dvwa-mysql-service.dvwa-group25-mysql.svc.cluster.local
