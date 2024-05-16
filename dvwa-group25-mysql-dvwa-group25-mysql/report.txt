@@ -1,0 +1,99 @@
+  Deployment              | dvwa-group25-mysql/dvwa-group25-mysql                             
+  Container               | europe-docker.pkg.dev/asgroup25/registry-as-25/mariadb-10:latest  
+  OS                      | linux                                                             
+  Arch                    |                                                                   
+  Distro                  |                                                                   
+  Output Directory        | out/dvwa-group25-mysql-dvwa-group25-mysql                         
+  policy-template version | v0.2.3                                                            
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+|              POLICY               |           SHORT DESC           | SEVERITY | ACTION |                       TAGS                        |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | The adversary is trying to     | 5        | Block  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | steal data.                    |          |        | MITRE_TA0008_lateral_movement                     |
+| remote-file-copy.yaml             |                                |          |        | MITRE_TA0010_exfiltration                         |
+|                                   |                                |          |        | MITRE_TA0006_credential_access                    |
+|                                   |                                |          |        | MITRE_T1552_unsecured_credentials                 |
+|                                   |                                |          |        | NIST_800-53_SI-4(18) NIST                         |
+|                                   |                                |          |        | NIST_800-53 NIST_800-53_SC-4                      |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | The adversary is trying to     | 5        | Block  | MITRE_execution                                   |
+| registry-as-25-mariadb-10-latest- | write under shm folder         |          |        | MITRE                                             |
+| write-in-shm-dir.yaml             |                                |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Adversaries may leverage the   | 10       | Block  | cryptominer                                       |
+| registry-as-25-mariadb-10-latest- | resources of co-opted systems  |          |        | MITRE_T1496_resource_hijacking                    |
+| crypto-miners.yaml                | to complete resource-intensive |          |        |                                                   |
+|                                   | tasks, which may impact        |          |        |                                                   |
+|                                   | system and/or hosted service   |          |        |                                                   |
+|                                   | availability.                  |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | System Information Discovery   | 3        | Block  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | - block system owner discovery |          |        | MITRE_T1082_system_information_discovery          |
+| system-owner-discovery.yaml       | commands                       |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Adversaries may abuse a        | 5        | Block  | MITRE_T1609_container_administration_command      |
+| registry-as-25-mariadb-10-latest- | container administration       |          |        | MITRE_TA0002_execution                            |
+| k8s-client-tool-exec.yaml         | service to execute commands    |          |        | MITRE_T1610_deploy_container                      |
+|                                   | within a container.            |          |        | MITRE NIST_800-53 NIST_800-53_AU-2                |
+|                                   |                                |          |        | NIST_800-53_SI-4 NIST                             |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | The adversary is trying to     | 5        | Block  | NIST_800-53_SI-7 NIST                             |
+| registry-as-25-mariadb-10-latest- | avoid being detected.          |          |        | NIST_800-53_SI-4 NIST_800-53                      |
+| write-etc-dir.yaml                |                                |          |        | MITRE_T1562.001_disable_or_modify_tools           |
+|                                   |                                |          |        | MITRE_T1036.005_match_legitimate_name_or_location |
+|                                   |                                |          |        | MITRE_TA0003_persistence                          |
+|                                   |                                |          |        | MITRE MITRE_T1036_masquerading                    |
+|                                   |                                |          |        | MITRE_TA0005_defense_evasion                      |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | File Integrity Monitoring      | 1        | Block  | NIST NIST_800-53_AU-2                             |
+| registry-as-25-mariadb-10-latest- |                                |          |        | NIST_800-53_SI-4 MITRE                            |
+| file-integrity-monitoring.yaml    |                                |          |        | MITRE_T1036_masquerading                          |
+|                                   |                                |          |        | MITRE_T1565_data_manipulation                     |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Adversaries may attempt to     | 5        | Audit  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | get a listing of services      |          |        | FGT1046                                           |
+| network-service-scanning.yaml     | running on remote hosts,       |          |        | FIGHT                                             |
+|                                   | including those that may be    |          |        | 5G                                                |
+|                                   | vulnerable to remote software  |          |        |                                                   |
+|                                   | exploitation.                  |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | System and Information         | 5        | Audit  | NIST SI-4                                         |
+| registry-as-25-mariadb-10-latest- | Integrity - System Monitoring  |          |        | NIST_800-53_SI-4                                  |
+| cronjob-cfg.yaml                  | Detect access to cronjob files |          |        | CIS CIS_Linux                                     |
+|                                   |                                |          |        | CIS_5.1_Configure_Cron                            |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Adversaries may use Valid      | 3        | Audit  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | Accounts to log into a service |          |        | FIGHT                                             |
+| remote-services.yaml              | specifically designed to       |          |        | FGT1021                                           |
+|                                   | accept remote connections,     |          |        | 5G                                                |
+|                                   | such as telnet, SSH, and VNC.  |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Adversaries may maliciously    | 6        | Audit  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | modify components of a victim  |          |        | FGT1562                                           |
+| impair-defense.yaml               | environment in order to        |          |        | FIGHT                                             |
+|                                   | hinder or disable defensive    |          |        | 5G                                                |
+|                                   | mechanisms.                    |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Restrict access to maintenance | 1        | Audit  | PCI_DSS                                           |
+| registry-as-25-mariadb-10-latest- | tools (apk, mii-tool, ...)     |          |        | MITRE                                             |
+| maint-tools-access.yaml           |                                |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | Restrict access to trusted     | 1        | Block  | MITRE                                             |
+| registry-as-25-mariadb-10-latest- | certificated bundles in the OS |          |        | MITRE_T1552_unsecured_credentials                 |
+| trusted-cert-mod.yaml             | image                          |          |        | FGT1555 FIGHT                                     |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | System and Information         | 5        | Block  | NIST NIST_800-53_AU-2                             |
+| registry-as-25-mariadb-10-latest- | Integrity - System Monitoring  |          |        | NIST_800-53_SI-4 MITRE                            |
+| write-under-bin-dir.yaml          | make directory under /bin/     |          |        | MITRE_T1036_masquerading                          |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | System and Information         | 5        | Audit  | NIST NIST_800-53_AU-2                             |
+| registry-as-25-mariadb-10-latest- | Integrity - System Monitoring  |          |        | NIST_800-53_SI-4 MITRE                            |
+| write-under-dev-dir.yaml          | make files under /dev/         |          |        | MITRE_T1036_masquerading                          |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| europe-docker-pkg-dev-asgroup25-  | System and Information         | 5        | Block  | NIST                                              |
+| registry-as-25-mariadb-10-latest- | Integrity - Least              |          |        | NIST_800-53_CM-7(4)                               |
+| pkg-mngr-exec.yaml                | Functionality deny execution   |          |        | SI-4 process                                      |
+|                                   | of package manager process in  |          |        | NIST_800-53_SI-4                                  |
+|                                   | container                      |          |        |                                                   |
++-----------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+

@@ -1,0 +1,24 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: dvwa-group25-web-europe-docker-pkg-dev-asgroup25-registry-as-25-dvwa-latest-write-under-dev-dir
+  namespace: dvwa-group25-web
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /dev/
+      readOnly: true
+      recursive: true
+  message: Alert! File creation under /dev/ directory detected.
+  selector:
+    matchLabels:
+      app: dvwa-web
+      tier: frontend
+  severity: 5
+  tags:
+  - NIST
+  - NIST_800-53_AU-2
+  - NIST_800-53_SI-4
+  - MITRE
+  - MITRE_T1036_masquerading

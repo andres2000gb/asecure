@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: dvwa-group25-mysql-europe-docker-pkg-dev-asgroup25-registry-as-25-mariadb-10-latest-system-owner-discovery
+  namespace: dvwa-group25-mysql
+spec:
+  action: Block
+  message: System owner discovery command execution denied
+  process:
+    matchPaths:
+    - path: /usr/bin/who
+    - path: /usr/bin/w
+    - path: /usr/bin/id
+    - path: /usr/bin/whoami
+  selector:
+    matchLabels:
+      app: dvwa-mysql
+      tier: backend
+  severity: 3
+  tags:
+  - MITRE
+  - MITRE_T1082_system_information_discovery

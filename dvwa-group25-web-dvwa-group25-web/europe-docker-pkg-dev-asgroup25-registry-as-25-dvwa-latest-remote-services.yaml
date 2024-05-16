@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: dvwa-group25-web-europe-docker-pkg-dev-asgroup25-registry-as-25-dvwa-latest-remote-services
+  namespace: dvwa-group25-web
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /etc/ssh/
+    matchPaths:
+    - path: /var/log/wtmp
+    - path: /var/run/utmp
+    - path: /var/log/auth.log
+    - path: /etc/passwd
+    - path: /etc/shadow
+  message: Warning! access sensitive files detected
+  selector:
+    matchLabels:
+      app: dvwa-web
+      tier: frontend
+  severity: 3
+  tags:
+  - MITRE
+  - FIGHT
+  - FGT1021
+  - 5G

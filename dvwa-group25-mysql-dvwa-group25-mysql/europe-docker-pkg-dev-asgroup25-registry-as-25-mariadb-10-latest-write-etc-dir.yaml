@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: dvwa-group25-mysql-europe-docker-pkg-dev-asgroup25-registry-as-25-mariadb-10-latest-write-etc-dir
+  namespace: dvwa-group25-mysql
+spec:
+  action: Block
+  file:
+    matchDirectories:
+    - dir: /etc/
+      readOnly: true
+      recursive: true
+  message: Alert! File creation under /etc/ directory detected.
+  selector:
+    matchLabels:
+      app: dvwa-mysql
+      tier: backend
+  severity: 5
+  tags:
+  - NIST_800-53_SI-7
+  - NIST
+  - NIST_800-53_SI-4
+  - NIST_800-53
+  - MITRE_T1562.001_disable_or_modify_tools
+  - MITRE_T1036.005_match_legitimate_name_or_location
+  - MITRE_TA0003_persistence
+  - MITRE
+  - MITRE_T1036_masquerading
+  - MITRE_TA0005_defense_evasion
