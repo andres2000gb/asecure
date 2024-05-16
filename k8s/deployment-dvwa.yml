@@ -38,6 +38,11 @@ spec:
           image: europe-docker.pkg.dev/asgroup25/registry-as-25/dvwa:latest
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 300m
+            limits:
+              cpu: 300m
           env:
             - name: DB_SERVER
               value: dvwa-mysql-service.dvwa-group25-mysql.svc.cluster.local
