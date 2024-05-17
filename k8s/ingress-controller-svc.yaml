@@ -9,10 +9,10 @@ metadata:
     app.kubernetes.io/version: 1.10.1
   annotations:
     cloud.google.com/network-tier: Standard
+    cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "service-lb-inspect"}}}'
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
-  externalTrafficPolicy: Local
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
@@ -31,5 +31,4 @@ spec:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
-  type: LoadBalancer
-  loadBalancerIP: 34.0.245.215
+  type: ClusterIP
