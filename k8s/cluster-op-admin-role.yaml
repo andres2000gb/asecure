@@ -1,0 +1,18 @@
+title: "Cluster Operational Admin"
+description: "Role with permissions for operational tasks on Kubernetes clusters."
+stage: "GA"
+includedPermissions:
+  - container.clusters.get
+  - container.clusters.list
+  - container.nodes.get
+  - container.nodes.list
+  - container.pods.create
+  - container.pods.delete
+  - container.pods.get
+  - container.pods.list
+  - container.pods.update
+  - container.services.create
+  - container.services.delete
+  - container.services.get
+  - container.services.list
+  - container.services.update

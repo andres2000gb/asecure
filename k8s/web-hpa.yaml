@@ -1,18 +1,15 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: web-hpa\
+  name: web-hpa
   namespace: dvwa-group25-web
-  annotations:
-    autoscaling.kubernetes.io/scale-down-stabilization: "30s"
-    autoscaling.kubernetes.io/scale-up-stabilization: "30s"
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: dvwa-group25-web
   minReplicas: 1
-  maxReplicas: 6
+  maxReplicas: 9
   metrics:
   - type: Resource
     resource:
@@ -20,3 +17,16 @@ spec:
       target:
         type: Utilization
         averageUtilization: 40
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 200
+        periodSeconds: 10
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 200
+        periodSeconds: 15

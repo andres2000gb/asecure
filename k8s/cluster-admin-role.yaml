@@ -1,0 +1,19 @@
+title: "Cluster Admin"
+description: "Role with permissions to manage Kubernetes clusters."
+stage: "GA"
+includedPermissions:
+  - container.clusters.create
+  - container.clusters.delete
+  - container.clusters.get
+  - container.clusters.list
+  - container.clusters.update
+  - container.nodes.create
+  - container.nodes.delete
+  - container.nodes.get
+  - container.nodes.list
+  - container.nodes.update
+  - container.pods.create
+  - container.pods.delete
+  - container.pods.get
+  - container.pods.list
+  - container.pods.update

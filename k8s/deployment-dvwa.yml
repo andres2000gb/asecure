@@ -35,12 +35,12 @@ spec:
       serviceAccountName: sa-web
       containers:
         - name: dvwa
-          image: europe-docker.pkg.dev/asgroup25/registry-as-25/dvwa:latest
+          image: europe-docker.pkg.dev/asgroup25/registry-as-25/dvwa-loaderio:latest
           ports:
             - containerPort: 80
           resources:
             requests:
-              cpu: 300m
+              cpu: 200m
             limits:
               cpu: 300m
           env:
